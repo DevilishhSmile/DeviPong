@@ -2,37 +2,39 @@
 
 namespace Systems.Ball
 {
-    [RequireComponent(typeof(Rigidbody2D))]
+    [AddComponentMenu("DeviPong/Ball/Ball Movement")]
     public class BallMovement : MonoBehaviour
     {
-        [SerializeField] private float speed = 10f;
-        [SerializeField] private float maxBounceAngle = 75f;
-        private Rigidbody2D _rigidbody2D;
-
+        private BallData _ballData;
+        
         private void Awake()
         {
-            _rigidbody2D = GetComponent<Rigidbody2D>();
+            _ballData = GetComponent<BallData>();
         }
-
+        
         void Start()
         {
             ResetBall();
             LaunchBall();
         }
-
-        void LaunchBall()
+        
+        public void LaunchBall()
         {
+            Rigidbody2D ballRigidbody2D = _ballData.Rigidbody2D;
+            float ballSpeed = _ballData.Speed;
+            
             float x = Random.Range(0, 2) == 0 ? -1 : 1;
             float y = Random.Range(-0.5f, 0.5f);
             Vector2 direction = new Vector2(x, y).normalized;
-            _rigidbody2D.linearVelocity = direction * speed;
+            ballRigidbody2D.linearVelocity = direction * ballSpeed;
         }
-
+        
         public void ResetBall()
         {
-            _rigidbody2D.linearVelocity = Vector2.zero;
+            Rigidbody2D ballRigidbody2D = _ballData.Rigidbody2D;
+            
+            ballRigidbody2D.linearVelocity = Vector2.zero;
             transform.position = Vector2.zero;
-            LaunchBall();
         }
     }
 }

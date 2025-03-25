@@ -2,6 +2,7 @@
 
 namespace Systems.Paddle
 {
+    [AddComponentMenu("DeviPong/Paddle/Paddle Movement")]
     [RequireComponent(typeof(Rigidbody2D))]
     public class PaddleMovement : MonoBehaviour
     {
@@ -15,18 +16,18 @@ namespace Systems.Paddle
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
         }
-
+        
         private void Start()
         {
             inputReader.Move += ChangeDirection;
             inputReader.EnablePlayerAction();
         }
-
+        
         private void ChangeDirection(Vector2 direction)
         {
             _verticalInput = direction.y;
         }
-
+        
         private void FixedUpdate()
         {
             _rigidbody2D.linearVelocityY = _verticalInput * speed;
