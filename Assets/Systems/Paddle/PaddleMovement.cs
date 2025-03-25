@@ -9,13 +9,11 @@ namespace Systems.Paddle
         [SerializeField] private InputReader inputReader;
         
         private Rigidbody2D _rigidbody2D;
-        private Transform _transform;
         private float _verticalInput;
         
         private void Awake()
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
-            _transform = transform;
         }
 
         private void Start()

@@ -4,7 +4,6 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using static InputSystem_Actions;
 
-
 public interface IInputReader
 {
     Vector2 Direction { get; }
