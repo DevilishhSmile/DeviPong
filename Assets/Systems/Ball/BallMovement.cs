@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Systems.Ball
 {
@@ -11,7 +12,17 @@ namespace Systems.Ball
         {
             _ballData = GetComponent<BallData>();
         }
-        
+
+        private void OnEnable()
+        {
+            _ballData.AmountWallHits.OnValueChanged += OnWallHit;
+        }
+
+        private void OnDisable()
+        {
+            _ballData.AmountWallHits.OnValueChanged -= OnWallHit;
+        }
+
         void Start()
         {
             ResetBall();
@@ -35,6 +46,14 @@ namespace Systems.Ball
             
             ballRigidbody2D.linearVelocity = Vector2.zero;
             transform.position = Vector2.zero;
+        }
+        
+        private void OnWallHit(int amountHits)
+        {
+            if (amountHits > 0)
+            {
+                
+            }
         }
     }
 }

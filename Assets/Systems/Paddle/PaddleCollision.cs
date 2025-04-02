@@ -15,6 +15,8 @@ namespace Systems.Paddle
         
         public void OnCollision(BallData ballData)
         {
+            IncreaseHits(ballData);
+            
             Transform paddleTransform = _paddleData.Transform;
             Collider2D paddleCollider = _paddleData.Collider;
             float maxBounceAngle = _paddleData.MaxBounceAngle;
@@ -35,6 +37,18 @@ namespace Systems.Paddle
             Vector2 newDirection = new Vector2(Mathf.Cos(bounceAngle) * directionX, Mathf.Sin(bounceAngle)).normalized;
             
             ballRigidbody2D.linearVelocity = newDirection * ballSpeed;
+        }
+
+        private void IncreaseHits(BallData ballData)
+        {
+            if (ballData.LastPaddleHit.Value != _paddleData)
+            {
+                ballData.AmountWallHits.Value = 0;
+                ballData.AmountPaddleHits.Value = 0;
+                
+                ballData.LastPaddleHit.Value = _paddleData;
+                ballData.AmountPaddleHits.Value++;
+            }
         }
     }
 }

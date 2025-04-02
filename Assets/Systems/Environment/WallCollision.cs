@@ -10,6 +10,8 @@ namespace Systems.Environment
         {
             Rigidbody2D ballRigidbody2D = ballData.Rigidbody2D;
             ballRigidbody2D.linearVelocityY *= -1;
+            
+            ballData.AmountWallHits.Value++;
         }
     }
 }
